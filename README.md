@@ -8,7 +8,7 @@ contém os testes automatizados
 item 1 - vídeo com os testes automatizados sendo executados
 item 2 - evidência da impossibilidade de executar o fluxo de compras.
 
-#### Automação
+### Automação
 
 ## requisitos
 é necessário ter o node instalado
