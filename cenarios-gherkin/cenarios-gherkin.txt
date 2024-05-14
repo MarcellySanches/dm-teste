@@ -1,0 +1,82 @@
+#language: pt
+
+Funcionalidade: Fluxo de aquisição de produtos na BookStore
+
+	Cenario: Pesquisar um produto pelo nome
+		Dado que estou na página de listagem de livros
+		Quando eu digito o nome do livro "Git Pocket Guide" na barra de pesquisa
+		E eu clico no botão de pesquisa
+		Então devo ver uma lista de resultado(s)
+		E a lista deve conter o produto pesquisado
+
+	Cenário: Adicionar um produto ao carrinho
+		Dado que encontrei um produto "Git Pocket Guide"
+		Quando eu clico no botão "Adicionar ao Carrinho"
+		Então o produto "Git Pocket Guide" deve ser adicionado ao meu carrinho de compras
+		E o item deve ser encontrado no carrinho
+
+	Cenário: Remover um produto do carrinho
+		Dado que estou na página do meu carrinho de compras
+		E o carrinho contém o produto "Git Pocket Guide"
+		Quando eu clico no botão de "remover produto" na minha do "Git Pocket Guide"
+		Então o produto "Git Pocket Guide" deve ser removido
+		E o total de itens no carrinho deve diminuir em 1
+		E o total do preço deve ser decrescido
+
+	Cenário: Realizar pagamento com "Cartão de Crédito"
+		Dado que estou na página de pagamento
+		E quero finaliza-lo com sucesso por meio de "Cartão de Crédito"
+		Quando eu seleciono o método de pagamento "Cartão de Crédito"
+		E preencho os detalhes do cartão com um cartão válido
+		E confirmo o pagamento
+		Então devo ver uma mensagem de confirmação de pagamento
+		E meu pedido deve ser processado com sucesso
+	
+	Cenário: Realizar pagamento com "Boleto bancário"
+		Dado que estou na página de pagamento
+		E quero finaliza-lo com sucesso por meio de "Boleto bancário"
+		Quando eu seleciono o método de pagamento "Boleto bancário"
+		Então devo ver uma mensagem que o boleto foi enviado para o e-mail
+		E deve aparecer um boleto na tela em pdf 
+
+	Cenário: Realizar pagamento com "Pix"
+		Dado que estou na página de pagamento
+		E quero finaliza-lo com sucesso por meio de "Pix"
+		Quando eu seleciono o método de pagamento "Pix"
+		Então devo ver um QRCode na tela
+		E um código com a opção copiar e colar
+
+	Cenário: Acompanhamento de pedido com pagamento "Boleto bancário" não efetuado
+		Dado que ainda não efetuei o pagamento do produto "Git Pocket Guide"
+		Quando eu acesso a página de acompanhamento/status de pedidos
+		Então devo ver o produto "Git Pocket Guide" com o status atual de "a pagar"
+		E verei a opção imprimir boleto
+
+	Cenário: Acompanhamento de pedido com pagamento por "Pix" não efetuado 
+		Dado que ainda não efetuei o pagamento do produto "Git Pocket Guide"
+		Quando eu acesso a página de acompanhamento/status de pedidos
+		Então devo ver o produto "Git Pocket Guide" com o status atual de "a pagar"
+		E verei a opção "visualizar QRCode"
+	
+	Cenário: Acompanhamento de pedido com pagamento por "Cartão de crédito" não aprovado
+		Dado os dados do cartão de crédito foram válidos para o pagamento do produto "Git Pocket Guide"
+		E o pagamento não foi aprovado
+		Quando eu acesso a página de acompanhamento/status de pedidos
+		Então devo ver o produto "Git Pocket Guide" com o status atual de "não aprovado"
+		E um descritivo "para mais informações consulte a operadora do cartão de crédito"
+	
+	Cenário: Acompanhamento de pedido com pagamento não aprovado
+		Dado que adicionei os dados do cartão de crédito para pagamento do produto "Git Pocket Guide"
+		E o pagamento não foi aprovado
+		Quando eu acesso a página de acompanhamento/status de pedidos
+		Então devo ver o produto "Git Pocket Guide" com o status atual de "não aprovado"
+		E um descritivo "para mais informações consulte a operadora do cartão de crédito"
+
+	Cenário: Acompanhamento de pedido com pagamento aprovado
+		Dado executei o pagamento do produto "Git Pocket Guide" com sucesso
+		Quando eu acesso a página de acompanhamento de pedidos
+		Então devo ver o status do meu pedido como "Pago"
+		E posso visualizar que o produto está disponível para download
+		
+		
+
